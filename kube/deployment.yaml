@@ -16,6 +16,12 @@ spec:
     spec:
       containers:
         - name: $PROJECT_NAME
+          args:
+            - flask
+            - --app
+            - app
+            - run
+            - --host=0.0.0.0
           image: $IMAGE
           ports:
             - containerPort: 5000
