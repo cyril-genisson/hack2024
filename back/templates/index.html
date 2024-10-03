@@ -6,37 +6,46 @@
     <title>Flask Web App</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 <body>
     {% include 'header.html' %}
 
-<div class="container">
-    <div class="chat-container">
-        <div class="chat-header">
-            Votre assistant EcoloBot
-        </div>
-
-        <div class="chat-body" id="chat-body">
-            <div class="message received">
-                <div class="bubble">
-                    Bonjour ! 
-                    
-                    Je suis EcoloBot, votre robot assistant durant votre visite. Que puis-je faire pour vous ?
+<main>
+    <div class="container">
+        <div class="chat-container">
+            <div class="chat-header">
+                Votre assistant EcoloBot
+            </div>
+    
+            <div class="chat-body" id="chat-body">
+                <div class="message received">
+                    <div class="bubble">
+                        Bonjour ! 
+                        
+                        Je suis EcoloBot, votre robot assistant durant votre visite. Que puis-je faire pour vous ?
+                    </div>
+                </div>
+                <div class="message sent">
+    
                 </div>
             </div>
-            <div class="message sent">
-
+    
+            <div class="chat-footer">
+                <input type="text" id="message-input" placeholder='Poser une question (Ex: "Il y a combien de platanes sur Paris ?" )'>
+                <button id="send-button">Envoyer</button>
             </div>
         </div>
-
-        <div class="chat-footer">
-            <input type="text" id="message-input" placeholder='Poser une question (Ex: "Il y a combien de platanes sur Paris ?" )'>
-            <button id="send-button">Envoyer</button>
-        </div>
     </div>
-</div>
+    
+    <div class="map">
+        <div id="map"></div>
+    </div>
+</main>
 
     <script src="../static/js/script.js"></script>
     <script src="{{ url_for('static', filename='js/header.js') }}"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="{{ url_for('static', filename='js/map.js') }}"></script>
 </body>
 </html>
