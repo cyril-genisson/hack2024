@@ -4,10 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flask Web App</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/header.css') }}">
 </head>
 <body>
     {% include 'header.html' %}
+
+    <main>
+        <h1>Hello World !</h1>
+
+        
+    </main>
 
     <script src="{{ url_for('static', filename='js/header.js') }}"></script>
 </body>

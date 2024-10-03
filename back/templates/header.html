@@ -1,11 +1,11 @@
 <header>
     <nav class="container-header">
         <a href="https://ia4sud.fr" class="logo-header">
-            <img src="../static/images/logo-ia4sud.svg" alt="code4sud logo">
+            <img src="{{ url_for('static', filename='images/logo-ia4sud.svg') }}" alt="code4sud logo">
         </a>
         <div class="menu-container">
             <button id="menuToggle" class="menu-burger">
-                <img src="../static/images/burger-icon.svg" alt="menu burger">
+                <img src="{{ url_for('static', filename='images/burger-icon.svg') }}" alt="menu burger">
             </button>
             <div id="drawer" class="drawer hidden">
                 <button id="closeDrawer" class="close-button">
