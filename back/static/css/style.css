@@ -9,6 +9,8 @@ body {
 
 main {
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     gap: 2rem;
@@ -133,13 +135,21 @@ div.leaflet-control-container div.leaflet-top.leaflet-left, div.leaflet-bottom.l
     z-index: 999;
 }
 
-@media only screen and (max-width: 48rem) {
+/* Responsive styles */
+@media only screen and (max-width: 768px) {
+    .container, .map {
+        width: 80%; /* Full width on smaller screens */
+    }
     #map {
         height: 80vh; /* Ajuste la hauteur pour les écrans plus petits */
     }
 }
 
-@media only screen and (max-width: 30rem) {
+@media only screen and (max-width: 480px) {
+    .chat-container {
+        height: 30rem;
+    }
+
     #map {
         height: 70vh; /* Ajuste encore plus la hauteur pour les très petits écrans */
     }
