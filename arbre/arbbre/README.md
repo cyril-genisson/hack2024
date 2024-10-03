@@ -28,7 +28,7 @@ This is a simple web application that allows users to chat with an AI model usin
 
 To set up this project, follow these steps: 
 
-Install LM Studio by downloading it from the official [LM Studio website](https://lmstudio.com). After installation, start the LM Studio application. Next, download the `meta-llama-3.1-8b-instruct` model from the LM Studio model repository or the official GitHub page, and load the model into LM Studio by following the application's instructions to import the model. 
+Install LM Studio by downloading it from the official [LM Studio website](https://lmstudio.com). After installation, start the LM Studio application. Next, download the `chocolatine-3b-instruct-dpo-revised` model from the LM Studio model repository or the official GitHub page, and load the model into LM Studio by following the application's instructions to import the model. 
 
 Then, clone the repository:
 
