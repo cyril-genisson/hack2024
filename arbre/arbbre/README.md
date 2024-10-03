@@ -34,7 +34,7 @@ Then, clone the repository:
 
 #### bash
 `git clone <[https://github.com/cyril-genisson/hack2024/tree/chocolatine/arbre/arbbre](https://github.com/cyril-genisson/hack2024.git)>
-cd <repository-name>`
+cd <repository-name>` go to the branch chocolatine -> arbre -> arbbre to find the right document.
 
 
 
