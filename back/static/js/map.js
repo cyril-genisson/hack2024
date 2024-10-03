@@ -40,27 +40,46 @@ function clearArbres() {
     arbreMarkers = []; // Réinitialiser le tableau des marqueurs
 }
 
+// Mise en cache des résultats de l'API
+let cacheArbres = {
+    data: null,
+    timestamp: null,
+    expiry: 60 * 1000 // Durée de validité du cache (ici, 1 minute)
+};
+
 // Fonction pour récupérer les données des arbres depuis l'API en fonction de la zone visible
 async function fetchArbres() {
-    // Obtenez les limites de la carte visible
     const bounds = map.getBounds();
     const southWest = bounds.getSouthWest();
     const northEast = bounds.getNorthEast();
-
     const limit = 1000; // Nombre maximum d'arbres par appel
 
     // Supprimer les anciens arbres avant de charger les nouveaux
     clearArbres();
 
+    // Vérifiez si les données sont en cache et valides
+    const currentTime = new Date().getTime();
+    if (cacheArbres.data && (currentTime - cacheArbres.timestamp < cacheArbres.expiry)) {
+        // Utiliser les données mises en cache
+        afficherArbres(cacheArbres.data);
+        return;
+    }
+
     try {
-        // Préparez les paramètres de la requête avec les limites géographiques
         const params = new URLSearchParams({
             'rows': limit,
-            'geofilter.bbox': `${southWest.lat},${southWest.lng},${northEast.lat},${northEast.lng}`
+            'geofilter.bbox': `${southWest.lng},${southWest.lat},${northEast.lng},${northEast.lat}`
         });
 
-        // Faites la requête à l'API avec les limites géographiques
         const response = await fetch(`https://opendata.paris.fr/api/records/1.0/search/?dataset=les-arbres&${params.toString()}`);
+
+        if (response.status === 429) { // Gestion de la limite de requêtes
+            const errorData = await response.json();
+            const resetTime = new Date(errorData.reset_time);
+            alert(`Limite de requêtes atteinte. Réessayez après ${resetTime.toLocaleTimeString()}.`);
+            return;
+        }
+
         const data = await response.json();
 
         // Affichez la réponse complète dans la console pour inspecter la structure
@@ -68,33 +87,9 @@ async function fetchArbres() {
 
         // Vérifiez si les données existent dans la structure attendue
         if (data.records && Array.isArray(data.records)) {
-            const arbres = data.records;
-
-            // Si aucun arbre n'est trouvé, logguer un message
-            if (arbres.length === 0) {
-                console.error("Aucun arbre trouvé dans cette requête.");
-                return;
-            }
-
-            // Parcourir et afficher les arbres sur la carte
-            arbres.forEach(arb => {
-                const lat = arb.fields.geo_point_2d[0]; // Latitude
-                const lng = arb.fields.geo_point_2d[1]; // Longitude
-                const nom = arb.fields.libellefrancais || "Arbre"; // Nom de l'arbre
-                const adresse = arb.fields.adresse || "Adresse inconnue"; // Adresse de l'arbre
-
-                if (lat !== undefined && lng !== undefined) {
-                    const circle = L.circleMarker([lat, lng], {
-                        color: 'green',      // Bordure verte
-                        fillColor: 'green',  // Remplissage vert
-                        fillOpacity: 0.8,    // Opacité du remplissage
-                        radius: 5            // Rayon du cercle
-                    }).addTo(map);
-                    circle.bindPopup(`<b>${nom}</b><br>${adresse}`);
-                } else {
-                    console.warn("Coordonnées manquantes ou invalides pour un arbre :", arb);
-                }
-            });
+            cacheArbres.data = data.records; // Mettez à jour le cache
+            cacheArbres.timestamp = currentTime; // Mettez à jour le timestamp
+            afficherArbres(data.records);
         } else {
             console.error("La structure des données est incorrecte.");
         }
@@ -103,8 +98,31 @@ async function fetchArbres() {
     }
 }
 
+// Fonction pour afficher les arbres sur la carte
+function afficherArbres(arbres) {
+    arbres.forEach(arb => {
+        const lat = arb.fields.geo_point_2d[0]; // Latitude
+        const lng = arb.fields.geo_point_2d[1]; // Longitude
+        const nom = arb.fields.libellefrancais || "Arbre"; // Nom de l'arbre
+        const adresse = arb.fields.adresse || "Adresse inconnue"; // Adresse de l'arbre
+
+        if (lat !== undefined && lng !== undefined) {
+            const circle = L.circleMarker([lat, lng], {
+                color: 'green',      // Bordure verte
+                fillColor: 'green',  // Remplissage vert
+                fillOpacity: 0.8,    // Opacité du remplissage
+                radius: 5            // Rayon du cercle
+            }).addTo(map);
+            circle.bindPopup(`<b>${nom}</b><br>${adresse}`);
+            arbreMarkers.push(circle); // Ajouter le marqueur au tableau
+        } else {
+            console.warn("Coordonnées manquantes ou invalides pour un arbre :", arb);
+        }
+    });
+}
+
 // Appeler la fonction pour récupérer les arbres lorsque la carte est déplacée ou zoomée
-map.on('moveend', fetchArbres);
+// map.on('moveend', fetchArbres);
 
 // Initialiser la récupération des arbres à la première ouverture de la carte
-fetchArbres();
+// fetchArbres();

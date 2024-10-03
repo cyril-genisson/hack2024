@@ -1,10 +1,5 @@
 body {
     margin: 0;
-    background-image: url('../images/pelouse.jpg'), linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.6));
-    background-size: cover;
-    background-position: center;
-    background-blend-mode: overlay; /* Mélange l'image avec l'overlay */
-    background-attachment: fixed;
 }
 
 main {
@@ -14,6 +9,7 @@ main {
     align-items: center;
     justify-content: center;
     gap: 2rem;
+    margin-bottom: 2rem;
 }
 
 .container {
