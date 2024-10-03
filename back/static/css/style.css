@@ -8,9 +8,12 @@ body {
 }
 
 main {
-    height: 100vh;
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
+    gap: 2rem;
 }
 
 .container {
@@ -20,17 +23,16 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-
-    width: 50%;
+    width: 40%;
 }
 
 .chat-container {
-    width: 650px;
-    height: 650px;
+    width: 40.625rem;
+    height: 40.625rem;
     max-width: 100%;
     background-color: #ffffff;
     border-radius: .5rem;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0rem .25rem .625rem rgba(0, 0, 0, 0.1);
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -39,16 +41,16 @@ main {
 
 .chat-header {
     background-color: #4CAF50;
-    padding: 15px;
+    padding: .9375rem;
     color: white;
     text-align: center;
-    font-size: 18px;
+    font-size: 1.125rem;
     font-weight: bold;
 }
 
 .chat-body {
-    padding: 15px;
-    height: 550px;
+    padding: .9375rem;
+    height: 34.375rem;
     flex-grow: 1;
     overflow-y: auto;
     background-color: #f9f9f9;
@@ -56,7 +58,7 @@ main {
 }
 
 .message {
-    margin: 10px 0;
+    margin: .625rem 0;
     display: flex;
 }
 
@@ -70,9 +72,9 @@ main {
 
 .message .bubble {
     max-width: 75%;
-    padding: 10px;
-    border-radius: 20px;
-    font-size: 14px;
+    padding: .625rem;
+    border-radius: 1.25rem;
+    font-size: .875rem;
 }
 
 .message.sent .bubble {
@@ -87,26 +89,26 @@ main {
 
 .chat-footer {
     display: flex;
-    padding: 10px;
+    padding: .625rem;
     background-color: #eee;
 }
 
 .chat-footer input {
     flex-grow: 1;
-    padding: 10px;
+    padding: .625rem;
     border: none;
-    border-radius: 20px;
+    border-radius: 1.25rem;
     outline: none;
 }
 
 .chat-footer button {
     background-color: #4CAF50;
     border: none;
-    padding: 10px 15px;
+    padding: .625rem .9375rem;
     color: white;
-    font-size: 16px;
-    border-radius: 20px;
-    margin-left: 10px;
+    font-size: 1rem;
+    border-radius: 1.25rem;
+    margin-left: .625rem;
     cursor: pointer;
     transition: background-color 0.3s;
 }
@@ -116,27 +118,38 @@ main {
 }
 
 .map {
-    margin: auto;
     display: flex;
     justify-content: center;
     width: 50%;
 }
 
 #map {
-    height: 650px; 
-    width: 80%; 
-    min-height: 400px;
+    height: 40.625rem; 
+    width: 100%; 
+    min-height: 25rem;
     border: none;
     border-radius: .5rem;
 }
 
+div.leaflet-control-container div.leaflet-top.leaflet-left, div.leaflet-bottom.leaflet-right {
+    z-index: 999;
+}
+
+/* Responsive styles */
 @media only screen and (max-width: 768px) {
+    .container, .map {
+        width: 80%; /* Full width on smaller screens */
+    }
     #map {
         height: 80vh; /* Ajuste la hauteur pour les écrans plus petits */
     }
 }
 
 @media only screen and (max-width: 480px) {
+    .chat-container {
+        height: 30rem;
+    }
+
     #map {
         height: 70vh; /* Ajuste encore plus la hauteur pour les très petits écrans */
     }
