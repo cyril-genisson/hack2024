@@ -33,7 +33,7 @@ Install LM Studio by downloading it from the official [LM Studio website](https:
 Then, clone the repository:
 
 #### bash
-`git clone <https://github.com/cyril-genisson/hack2024/tree/chocolatine/arbre/arbbre>
+`git clone <[https://github.com/cyril-genisson/hack2024/tree/chocolatine/arbre/arbbre](https://github.com/cyril-genisson/hack2024.git)>
 cd <repository-name>`
 
 
