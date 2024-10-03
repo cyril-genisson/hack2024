@@ -50,7 +50,7 @@ source venv/bin/activate`
  pip install -r requirements.txt`
 
 Usage
-Ensure that your local LM Studio server is running with the meta-llama-3.1-8b-instruct model loaded. Run the Flask application:
+Ensure that your local LM Studio server is running with the chocolatine-3b-instruct-dpo-revised model loaded. Run the Flask application:
 `python app.py` to run the `flask run --reload`
 
 
