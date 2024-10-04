@@ -1,3 +1,153 @@
 body {
     margin: 0;
 }
+
+main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.container {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+}
+
+.chat-container {
+    width: 40.625rem;
+    height: 40.625rem;
+    max-width: 100%;
+    background-color: #ffffff;
+    border-radius: .5rem;
+    box-shadow: 0rem .25rem .625rem rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 999;
+}
+
+.chat-header {
+    background-color: #4CAF50;
+    padding: .9375rem;
+    color: white;
+    text-align: center;
+    font-size: 1.125rem;
+    font-weight: bold;
+}
+
+.chat-body {
+    padding: .9375rem;
+    height: 34.375rem;
+    flex-grow: 1;
+    overflow-y: auto;
+    background-color: #f9f9f9;
+    overflow-y: auto;
+}
+
+.message {
+    margin: .625rem 0;
+    display: flex;
+}
+
+.message.sent {
+    justify-content: flex-end;
+}
+
+.message.received {
+    justify-content: flex-start;
+}
+
+.message .bubble {
+    max-width: 75%;
+    padding: .625rem;
+    border-radius: 1.25rem;
+    font-size: .875rem;
+}
+
+.message.sent .bubble {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.message.received .bubble {
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.chat-footer {
+    display: flex;
+    padding: .625rem;
+    background-color: #eee;
+}
+
+.chat-footer input {
+    flex-grow: 1;
+    padding: .625rem;
+    border: none;
+    border-radius: 1.25rem;
+    outline: none;
+}
+
+.chat-footer button {
+    background-color: #4CAF50;
+    border: none;
+    padding: .625rem .9375rem;
+    color: white;
+    font-size: 1rem;
+    border-radius: 1.25rem;
+    margin-left: .625rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.chat-footer button:hover {
+    background-color: #45a049;
+}
+
+.map {
+    display: flex;
+    justify-content: center;
+    width: 50%;
+}
+
+#map {
+    height: 40.625rem; 
+    width: 100%; 
+    min-height: 25rem;
+    border: none;
+    border-radius: .5rem;
+}
+
+div.leaflet-control-container div.leaflet-top.leaflet-left, div.leaflet-bottom.leaflet-right {
+    z-index: 999;
+}
+
+/* Responsive styles */
+@media only screen and (max-width: 768px) {
+    .container, .map {
+        width: 80%; /* Full width on smaller screens */
+    }
+    #map {
+        height: 80vh; /* Ajuste la hauteur pour les écrans plus petits */
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .chat-container {
+        height: 30rem;
+    }
+
+    #map {
+        height: 70vh; /* Ajuste encore plus la hauteur pour les très petits écrans */
+    }
+}
