@@ -11,7 +11,7 @@ app.config["SESSION_PERMANENT"] = False
 app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
-MISTRAL_API_KEY = "iWzL01E2EVBLPWOzqKg3Y4nn9Dvx08Ul"
+MISTRAL_API_KEY = "iWzL01E2EVBLP;;;;;;;;;"
 api_key = os.environ.get("MISTRAL_API_KEY", MISTRAL_API_KEY)
 model = "mistral-large-latest"
 
