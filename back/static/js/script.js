@@ -32,6 +32,36 @@ async function loadFileContent() {
 }
 
 
+// fonction qui affiche le contenu de data dans la bulle
+function insertData(data, typingIndicator) {
+        // Supprimer la bulle "En train d'écrire..."
+        chatBody.removeChild(typingIndicator);
+
+        // Afficher un message de confirmation
+        const confirmationDiv = document.createElement('div');
+        confirmationDiv.className = 'message received';
+        confirmationDiv.innerHTML = '<div class="bubble">'+data.response+'</div>';
+        chatBody.appendChild(confirmationDiv);
+
+        // Faire défiler vers le bas pour voir le nouveau message
+        chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+async function loadFileContent() {
+    let fileContent = '';
+
+    try {
+        const response = await fetch('/static/donnees.txt'); // Attendre la réponse
+        fileContent = await response.text(); // Attendre que le texte soit extrait
+        console.log(fileContent); // Afficher le contenu une fois récupéré
+    } catch (error) {
+        console.error('Erreur lors du chargement du fichier:', error);
+    }
+
+    return fileContent; // Retourner le contenu si nécessaire
+}
+
+
 // Fonction qui envoie le message
 function sendMessage() {
     const messageText = messageInput.value;
@@ -49,6 +79,10 @@ function sendMessage() {
         typingIndicator.innerHTML = '<div class="bubble">En train de répondre...</div>';
         chatBody.appendChild(typingIndicator);
 
+        // Affichage de la méthode "curl" mais version javascript
+        // const fileContent = loadFileContent();
+
+       
         // Affichage de la méthode "curl" mais version javascript
         // const fileContent = loadFileContent();
 

@@ -95,7 +95,7 @@ async function fetchArbres() {
         // Préparez les paramètres de la requête avec les limites géographiques
         const params = new URLSearchParams({
             'rows': limit,
-            'geofilter.bbox': `${southWest.lat},${southWest.lng},${northEast.lat},${northEast.lng}`
+            'geofilter.bbox': `${southWest.lat},${southWest.lng},${northEast.lat},${northEast.lng}`,
         });
 
         console.log("Requête envoyée à l'API avec les paramètres :", params.toString());
@@ -103,6 +103,9 @@ async function fetchArbres() {
         // Faites la requête à l'API avec les limites géographiques
         const response = await fetch(`https://opendata.paris.fr/api/records/1.0/search/?dataset=les-arbres&${params.toString()}`);
         const data = await response.json();
+
+        // Affichez la réponse complète dans la console pour inspecter la structure
+        console.log(data);
 
         // Vérifiez si les données existent dans la structure attendue
         if (data.records && Array.isArray(data.records)) {
